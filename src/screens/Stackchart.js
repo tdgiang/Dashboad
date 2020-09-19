@@ -36,12 +36,7 @@ class StackedBarChartScreen extends React.Component {
 
                 ],
                 config: {
-                    barWidth: 2,
-                    group: {
-                        fromX: 10,
-                        groupSpace: 10,
-                        barSpace: 10,
-                    }
+                    barWidth: 1,
                 }
 
 
