@@ -57,7 +57,6 @@ class StackedBarChartScreen extends React.Component {
                 }
             },
             xAxis: {
-
                 valueFormatter: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
                 granularityEnabled: true,
                 granularity: 1,
@@ -107,6 +106,7 @@ class StackedBarChartScreen extends React.Component {
                 <View style={{ marginHorizontal: 20 }} >
                     <Text style={styles.title}  >Đơn vị tính:Triệu VNĐ</Text>
                     <BarChart
+                        legend={{ enabled: false }}
                         style={chart}
                         xAxis={this.state.xAxis}
                         config={this.state.config}
