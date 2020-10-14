@@ -3,7 +3,7 @@ import {
     AppRegistry,
     StyleSheet,
     Text,
-    View, processColor, Dimensions
+    View, processColor, Dimensions, TouchableOpacity
 } from 'react-native';
 
 const { width, height } = Dimensions.get('window')
@@ -30,7 +30,7 @@ class StackedBarChartScreen extends React.Component {
                 }
             },
             xAxis: {
-                valueFormatter: ['01', '02', '03', '04'],
+                valueFormatter: ['01/2020', '02/2020', '03/2020', '04/2020'],
                 granularityEnabled: true,
                 granularity: 1,
                 gridDashedLine: {
@@ -38,7 +38,7 @@ class StackedBarChartScreen extends React.Component {
                     spaceLength: 5,
                     phase: 0
                 },
-                textSize: 18,
+                textSize: 12,
                 position: 'BOTTOM',
                 drawAxisLine: false,
 
@@ -57,7 +57,7 @@ class StackedBarChartScreen extends React.Component {
     render() {
         return (
 
-            <View style={{ flex: 1, margin: 40 }}>
+            <View style={{ flex: 1 }}>
 
                 <View style={styles.headers}>
                     <View style={styles.rowBet} >
@@ -65,14 +65,14 @@ class StackedBarChartScreen extends React.Component {
                             <View style={[styles.legend, { backgroundColor: '#29BF12' }]} />
                             <Text>Ngày công</Text>
                         </View>
-                        <Text>{this.state.columnSelect[0] && this.state.columnSelect[0]}</Text>
+                        <Text>{this.state.columnSelect[1] && this.state.columnSelect[1]}</Text>
                     </View>
                     <View style={styles.rowBet} >
                         <View style={styles.row} >
                             <View style={[styles.legend, { backgroundColor: '#E71D36' }]} />
                             <Text>Ngày nghỉ</Text>
                         </View>
-                        <Text>{this.state.columnSelect[1] && this.state.columnSelect[1]}</Text>
+                        <Text>{this.state.columnSelect[0] && this.state.columnSelect[0]}</Text>
                     </View>
                     <View style={styles.rowBet} >
                         <View style={styles.row} >
@@ -82,41 +82,48 @@ class StackedBarChartScreen extends React.Component {
                         <Text>{this.state.columnSelect[2] && this.state.columnSelect[2]}</Text>
                     </View>
                 </View>
-
-                <View style={styles.styleChart}>
-                    <BarChart
-                        style={styles.chart}
-                        xAxis={this.state.xAxis}
-                        yAxis={{
+                <BarChart
+                    style={styles.chart}
+                    xAxis={this.state.xAxis}
+                    yAxis={{
+                        axisMinimum: 0,
+                        gridLineWidth: 0.4,
+                        left: {
+                            gridLineWidth: 0.5,
                             axisMinimum: 0,
-                            gridLineWidth: 0.4,
-                            left: {
-                                gridLineWidth: 0.5,
-                                axisMinimum: 0,
-                                granularity: 0,
-                            },
-                            right: {
-                                enabled: false,
-                            },
-                        }}
-                        legend={{ enabled: false }}
-                        data={this.state.data}
-                        drawValueAboveBar={false}
-                        visibleRange={{ x: { min: 4, max: 4 } }}
-                        marker={{
+                            granularity: 0,
+                        },
+                        right: {
                             enabled: false,
-                        }}
-                        onSelect={this.handleSelect.bind(this)}
+                        },
+                    }}
+                    legend={{ enabled: false }}
+                    data={this.state.data}
+                    drawValueAboveBar={false}
+                    visibleRange={{ x: { min: 4, max: 4 } }}
+                    marker={{
+                        enabled: false,
+                    }}
+                    onSelect={this.handleSelect.bind(this)}
+                    chartDescription={{ text: "" }}
+                    drawBorders={false}
+                    scaleEnabled={false}
+                    doubleTapToZoomEnabled={false}
+                    pinchZoom={false}
 
-                        chartDescription={{ text: "" }}
-                        drawBorders={false}
-                        scaleEnabled={false}
-                        doubleTapToZoomEnabled={false}
-                        pinchZoom={false}
-
-                    />
+                />
+                <View style={[styles.rowBet, { marginHorizontal: 20 }]} >
+                    <TouchableOpacity
+                        onPress={() => console.log("Pre  month")}
+                    >
+                        <Text>Hello</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => console.log("Pre  month")}
+                    >
+                        <Text>Hello</Text>
+                    </TouchableOpacity>
                 </View>
-
             </View>
         );
     }
@@ -131,12 +138,15 @@ const styles = StyleSheet.create({
         height: height / 2,
         width: width - 60,
         marginRight: 20,
+        marginHorizontal: 20
     },
     headers: {
-        backgroundColor: 'gray',
+        backgroundColor: '#f2f2f2',
         borderRadius: 4,
         paddingVertical: 10,
-        paddingHorizontal: 10
+        paddingHorizontal: 10,
+        marginHorizontal: 40,
+        marginVertical: 10
     },
     rowBet: {
         flexDirection: 'row',
